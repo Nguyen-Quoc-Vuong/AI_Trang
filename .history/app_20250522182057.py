@@ -5,6 +5,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import datetime
 import json
+from oauth2client.service_account import ServiceAccountCredentials
 
 
 # Load model và scaler
@@ -14,9 +15,6 @@ scaler = joblib.load('scaler.pkl')
 # Kết nối Google Sheet
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 # creds = ServiceAccountCredentials.from_json_keyfile_name("student-predictions.json", scope)
-json_account_info = json.loads(st.secrets["GCP_SERVICE_ACCOUNT"])
-creds = ServiceAccountCredentials.from_json_keyfile_dict(json_account_info, scope)
-
 client = gspread.authorize(creds)
 sheet = client.open_by_key("12Fuj0GmbROQupAreLyqPAqMjPEMxoh7gNLEy3BIDOR4").sheet1
 

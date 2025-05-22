@@ -5,6 +5,11 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import datetime
 import json
+import os
+
+gcp_sa_json = os.getenv("GCP_SERVICE_ACCOUNT")
+credentials_info = json.loads(gcp_sa_json)
+
 
 
 # Load model và scaler

@@ -5,6 +5,10 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import datetime
 import json
+import os
+
+
+
 
 
 # Load model và scaler
