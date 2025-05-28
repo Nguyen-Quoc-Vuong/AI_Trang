@@ -5,7 +5,7 @@ import pandas as pd
 import os
 import requests
 
-GOOGLE_SHEET_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbzw8A-w9RUzR5-vBZxdDL1NSA2qyxomca24RDzbcfBz7YkzFTkwgFZEYLOhGdchx5tk/exec"  # Thay bằng URL của bạn
+GOOGLE_SHEET_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwDrurTh5cDK7lDnB3ZbvB9emPOpwpZU2JVL63CpOjvgI4DY7vZVJwHbNhee7IOns-k/exec"  
 
 # Load model
 with open('SP_rf.pkl', 'rb') as file:
@@ -120,7 +120,7 @@ if not st.session_state['feedback_submitted']:
         user_feedback3 = binary_input("Giao diện trình bày kết quả có dễ hiểu không?", ["Có", "Không"])
         user_feedback4 = binary_input("Tốc độ xử lý của mô hình có đáp ứng nhu cầu của bạn không?", ["Có", "Không"])
         if st.button("Gửi đánh giá"):
-            # Lưu đánh giá vào file CSV
+            # Lưu đánh giá vào GG Sheet 
             feedback_data = {
                 "Ten": user_name,
                 "DuDoan": st.session_state['prediction'],
