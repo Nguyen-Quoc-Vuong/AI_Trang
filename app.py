@@ -122,16 +122,17 @@ if not st.session_state['feedback_submitted']:
         if st.button("Gửi đánh giá"):
             # Lưu đánh giá vào file CSV
             feedback_data = {
-                "Tên": user_name,
-                "Dự đoán": st.session_state['prediction'],
-                "Đánh giá mức độ hài lòng chung": user_feedback,
-                "Kết quả dự đoán đúng thực tế": user_feedback1,
-                "Tin tưởng vào độ tin cậy": user_feedback2,
-                "Giao diện dễ hiểu": user_feedback3,
-                "Tốc độ xử lý đáp ứng nhu cầu": user_feedback4
+                "Ten": user_name,
+                "DuDoan": st.session_state['prediction'],
+                "HaiLong": user_feedback,
+                "DungThucTe": user_feedback1,
+                "TinCay": user_feedback2,
+                "DeHieu": user_feedback3,
+                "TocDo": user_feedback4
             }
             try:
                 requests.post(GOOGLE_SHEET_WEBAPP_URL, json=feedback_data)
+                
                 st.session_state['feedback_submitted'] = True
             except Exception as e:
                 st.error("Không gửi được đánh giá lên Google Sheets. Lỗi: " + str(e))
