@@ -3,6 +3,9 @@ import numpy as np
 import pickle
 import pandas as pd
 import os
+import requests
+
+GOOGLE_SHEET_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbzw8A-w9RUzR5-vBZxdDL1NSA2qyxomca24RDzbcfBz7YkzFTkwgFZEYLOhGdchx5tk/exec"  # Thay bằng URL của bạn
 
 # Load model
 with open('SP_rf.pkl', 'rb') as file:
@@ -127,14 +130,11 @@ if not st.session_state['feedback_submitted']:
                 "Giao diện dễ hiểu": user_feedback3,
                 "Tốc độ xử lý đáp ứng nhu cầu": user_feedback4
             }
-            feedback_file = "user_feedback.csv"
-            if os.path.exists(feedback_file):
-                df = pd.read_csv(feedback_file)
-                df = pd.concat([df, pd.DataFrame([feedback_data])], ignore_index=True)
-            else:
-                df = pd.DataFrame([feedback_data])
-            df.to_csv(feedback_file, index=False, encoding="utf-8-sig")
-            st.session_state['feedback_submitted'] = True
+            try:
+                requests.post(GOOGLE_SHEET_WEBAPP_URL, json=feedback_data)
+                st.session_state['feedback_submitted'] = True
+            except Exception as e:
+                st.error("Không gửi được đánh giá lên Google Sheets. Lỗi: " + str(e))
 
  # Giao diện sau khi gửi đánh giá
 if st.session_state['feedback_submitted']:
